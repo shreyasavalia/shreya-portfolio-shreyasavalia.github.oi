@@ -3,11 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GitHub Club | Shreya's Repositories</title>
-  <meta name="description" content="A modern GitHub Club page showcasing all repositories with search, filters, and clean UI/UX." />
+  <title>GitHub Club | Repo Showcase</title>
+  <meta
+    name="description"
+    content="GitHub Club dashboard that showcases all repositories with smooth search, sorting, filters, and detailed project cards."
+  />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -15,11 +21,15 @@
 
   <header class="site-header">
     <div class="container nav-wrap">
-      <a href="#" class="brand" aria-label="GitHub Club home">GitHub <span>Club</span></a>
-      <nav aria-label="Main navigation">
+      <a href="#" class="brand" aria-label="GitHub Club home">
+        <span class="brand-icon" aria-hidden="true">◆</span>
+        GitHub Club
+      </a>
+      <nav aria-label="Primary navigation">
         <ul class="nav-links">
           <li><a href="#repos">Repositories</a></li>
-          <li><a href="#how">How it works</a></li>
+          <li><a href="#insights">Insights</a></li>
+          <li><a href="#about">About</a></li>
         </ul>
       </nav>
     </div>
@@ -27,40 +37,71 @@
 
   <main id="main">
     <section class="hero container">
-      <p class="tag">🚀 Built for showcasing all your work</p>
-      <h1>All my GitHub repositories in one beautiful place.</h1>
-      <p class="subtext">
-        Explore every public repository with fast search, smart sorting, and project cards designed for readability.
-      </p>
-      <div class="hero-cta">
-        <a class="btn primary" href="#repos">View Repositories</a>
-        <a class="btn ghost" id="profileBtn" href="https://github.com/shreyasavalia" target="_blank" rel="noopener noreferrer">Open GitHub Profile</a>
+      <div class="hero-panel">
+        <p class="eyebrow">✨ Smart GitHub showcase for your club portfolio</p>
+        <h1>One beautiful website that displays all your repositories.</h1>
+        <p class="hero-copy">
+          Search instantly, filter by language, sort by impact, and open projects directly on GitHub. Designed for
+          smooth UX, accessibility, and GitHub Pages deployment.
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#repos">Explore Projects</a>
+          <a
+            class="btn btn-secondary"
+            id="profileBtn"
+            href="https://github.com/shreyasavalia"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Open GitHub Profile</a
+          >
+        </div>
       </div>
     </section>
 
     <section id="repos" class="repos-section">
       <div class="container">
-        <div class="section-top">
+        <div class="section-head">
           <div>
             <h2>Repository Directory</h2>
             <p class="helper" id="repoCount">Loading repositories...</p>
           </div>
+          <div class="stat-cards" aria-live="polite">
+            <article class="stat-card">
+              <p class="label">Total Stars</p>
+              <p id="totalStars" class="value">0</p>
+            </article>
+            <article class="stat-card">
+              <p class="label">Total Forks</p>
+              <p id="totalForks" class="value">0</p>
+            </article>
+            <article class="stat-card">
+              <p class="label">Top Language</p>
+              <p id="topLanguage" class="value">—</p>
+            </article>
+          </div>
         </div>
 
-        <form class="controls" aria-label="Repository filters" onsubmit="return false">
+        <form class="controls" aria-label="Repository controls" onsubmit="return false">
           <label>
             GitHub Username
             <input type="text" id="usernameInput" value="shreyasavalia" placeholder="Enter username" />
           </label>
           <label>
             Search repositories
-            <input type="search" id="searchInput" placeholder="Search by name or description" />
+            <input type="search" id="searchInput" placeholder="Search by name, description, or topic" />
+          </label>
+          <label>
+            Language
+            <select id="languageSelect">
+              <option value="all">All Languages</option>
+            </select>
           </label>
           <label>
             Sort by
             <select id="sortSelect">
               <option value="updated">Last Updated</option>
               <option value="stars">Most Stars</option>
+              <option value="forks">Most Forks</option>
               <option value="name">Name (A-Z)</option>
             </select>
           </label>
@@ -72,28 +113,47 @@
               <option value="forks">Forks only</option>
             </select>
           </label>
-          <button class="btn primary" id="reloadBtn" type="button">Load Repositories</button>
+          <div class="action-group">
+            <button class="btn btn-primary" id="reloadBtn" type="button">Load Repositories</button>
+            <button class="btn btn-secondary" id="resetBtn" type="button">Reset Filters</button>
+          </div>
         </form>
 
         <p id="status" role="status" aria-live="polite" class="status"></p>
-
         <div id="repoGrid" class="repo-grid" aria-live="polite"></div>
       </div>
     </section>
 
-    <section id="how" class="container how-section">
-      <h2>How this stays functional</h2>
-      <ul>
-        <li>Fetches all public repositories directly from GitHub API using pagination.</li>
-        <li>Works without backend setup and runs on GitHub Pages.</li>
-        <li>Provides accessible controls, responsive cards, and keyboard-friendly interactions.</li>
-      </ul>
+    <section id="insights" class="container insights-section">
+      <h2>What makes this functional</h2>
+      <div class="insight-grid">
+        <article>
+          <h3>Complete API Fetch</h3>
+          <p>Loads all public repositories using GitHub API pagination, so big accounts still display everything.</p>
+        </article>
+        <article>
+          <h3>Fast Controls</h3>
+          <p>Client-side filtering and sorting give immediate feedback while keeping API calls minimal.</p>
+        </article>
+        <article>
+          <h3>Accessible UI</h3>
+          <p>Semantic markup, keyboard focus states, clear labels, and live status updates improve usability.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="about" class="container about-section">
+      <h2>About GitHub Club</h2>
+      <p>
+        This site is ready for GitHub Pages and gives your club a polished portfolio hub where anyone can explore all
+        repositories from one place.
+      </p>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <p>© 2026 GitHub Club by Shreya Savalia • Built with HTML, CSS, and JavaScript.</p>
+      <p>© 2026 GitHub Club • Built with HTML, CSS, and JavaScript.</p>
     </div>
   </footer>
 
@@ -103,14 +163,21 @@
       search: document.getElementById('searchInput'),
       sort: document.getElementById('sortSelect'),
       type: document.getElementById('typeSelect'),
+      language: document.getElementById('languageSelect'),
       reload: document.getElementById('reloadBtn'),
+      reset: document.getElementById('resetBtn'),
       grid: document.getElementById('repoGrid'),
       status: document.getElementById('status'),
       count: document.getElementById('repoCount'),
-      profileBtn: document.getElementById('profileBtn')
+      profileBtn: document.getElementById('profileBtn'),
+      totalStars: document.getElementById('totalStars'),
+      totalForks: document.getElementById('totalForks'),
+      topLanguage: document.getElementById('topLanguage')
     };
 
     let repositories = [];
+
+    const numberFormat = new Intl.NumberFormat();
 
     function formatDate(dateString) {
       return new Date(dateString).toLocaleDateString(undefined, {
@@ -125,55 +192,99 @@
       elements.status.classList.toggle('error', isError);
     }
 
+    function updateLanguageOptions() {
+      const languageCounts = repositories.reduce((acc, repo) => {
+        const language = repo.language || 'Unknown';
+        acc[language] = (acc[language] || 0) + 1;
+        return acc;
+      }, {});
+
+      const languages = Object.entries(languageCounts).sort((a, b) => b[1] - a[1]);
+      elements.language.innerHTML = ['<option value="all">All Languages</option>']
+        .concat(languages.map(([name, count]) => `<option value="${name}">${name} (${count})</option>`))
+        .join('');
+    }
+
+    function updateStats() {
+      const totalStars = repositories.reduce((sum, repo) => sum + repo.stargazers_count, 0);
+      const totalForks = repositories.reduce((sum, repo) => sum + repo.forks_count, 0);
+
+      const topLanguage = repositories
+        .map((repo) => repo.language)
+        .filter(Boolean)
+        .reduce((acc, language) => {
+          acc[language] = (acc[language] || 0) + 1;
+          return acc;
+        }, {});
+
+      const topLanguageEntry = Object.entries(topLanguage).sort((a, b) => b[1] - a[1])[0];
+
+      elements.totalStars.textContent = numberFormat.format(totalStars);
+      elements.totalForks.textContent = numberFormat.format(totalForks);
+      elements.topLanguage.textContent = topLanguageEntry ? topLanguageEntry[0] : '—';
+    }
+
+    function normalizeTopics(repo) {
+      return Array.isArray(repo.topics) ? repo.topics : [];
+    }
+
     function renderRepositories() {
-      const q = elements.search.value.trim().toLowerCase();
+      const query = elements.search.value.trim().toLowerCase();
       const type = elements.type.value;
       const sortBy = elements.sort.value;
+      const language = elements.language.value;
 
-      let filtered = repositories.filter((repo) => {
-        const text = `${repo.name} ${repo.description || ''}`.toLowerCase();
-        const matchSearch = text.includes(q);
-        const matchType =
-          type === 'all' ||
-          (type === 'source' && !repo.fork) ||
-          (type === 'forks' && repo.fork);
+      const filtered = repositories
+        .filter((repo) => {
+          const topics = normalizeTopics(repo).join(' ').toLowerCase();
+          const text = `${repo.name} ${repo.description || ''} ${topics}`.toLowerCase();
+          const matchesSearch = text.includes(query);
+          const matchesType =
+            type === 'all' || (type === 'source' && !repo.fork) || (type === 'forks' && repo.fork);
+          const repoLanguage = repo.language || 'Unknown';
+          const matchesLanguage = language === 'all' || language === repoLanguage;
 
-        return matchSearch && matchType;
-      });
+          return matchesSearch && matchesType && matchesLanguage;
+        })
+        .sort((a, b) => {
+          if (sortBy === 'stars') return b.stargazers_count - a.stargazers_count;
+          if (sortBy === 'forks') return b.forks_count - a.forks_count;
+          if (sortBy === 'name') return a.name.localeCompare(b.name);
+          return new Date(b.updated_at) - new Date(a.updated_at);
+        });
 
-      filtered.sort((a, b) => {
-        if (sortBy === 'stars') return b.stargazers_count - a.stargazers_count;
-        if (sortBy === 'name') return a.name.localeCompare(b.name);
-        return new Date(b.updated_at) - new Date(a.updated_at);
-      });
-
-      elements.count.textContent = `${filtered.length} shown • ${repositories.length} total repository items`;
+      elements.count.textContent = `${filtered.length} shown • ${repositories.length} total repositories`;
 
       if (!filtered.length) {
-        elements.grid.innerHTML = '<p class="empty">No repositories match your current filters.</p>';
+        elements.grid.innerHTML = '<p class="empty">No repositories match your filters. Try adjusting your search.</p>';
         return;
       }
 
       elements.grid.innerHTML = filtered
         .map((repo) => {
-          const language = repo.language || 'Not specified';
+          const languageLabel = repo.language || 'Unknown';
           const description = repo.description || 'No description provided yet.';
+          const topics = normalizeTopics(repo);
 
           return `
             <article class="repo-card">
               <div class="repo-head">
-                <h3><a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">${repo.name}</a></h3>
+                <h3>
+                  <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">${repo.name}</a>
+                </h3>
                 ${repo.fork ? '<span class="pill">Fork</span>' : '<span class="pill source">Source</span>'}
               </div>
               <p class="repo-desc">${description}</p>
               <div class="meta-row">
-                <span>⭐ ${repo.stargazers_count}</span>
-                <span>🍴 ${repo.forks_count}</span>
-                <span>🧩 ${language}</span>
+                <span>⭐ ${numberFormat.format(repo.stargazers_count)}</span>
+                <span>🍴 ${numberFormat.format(repo.forks_count)}</span>
+                <span>🧩 ${languageLabel}</span>
               </div>
               <div class="meta-row muted">
                 <span>Updated: ${formatDate(repo.updated_at)}</span>
+                <span>${repo.private ? 'Private' : 'Public'}</span>
               </div>
+              ${topics.length ? `<div class="topic-row">${topics.map((topic) => `<span class="topic">#${topic}</span>`).join('')}</div>` : ''}
             </article>
           `;
         })
@@ -182,25 +293,51 @@
 
     async function fetchAllRepos(username) {
       let page = 1;
-      let all = [];
+      let allRepos = [];
 
       while (true) {
         const url = `https://api.github.com/users/${encodeURIComponent(username)}/repos?per_page=100&page=${page}&sort=updated`;
-        const response = await fetch(url);
+        const response = await fetch(url, {
+          headers: {
+            Accept: 'application/vnd.github+json'
+          }
+        });
 
         if (!response.ok) {
-          throw new Error(response.status === 404 ? 'GitHub username not found.' : 'Unable to load repositories right now.');
+          const message = response.status === 404
+            ? 'GitHub username not found.'
+            : response.status === 403
+            ? 'GitHub API rate limit exceeded. Try again in a few minutes.'
+            : 'Unable to load repositories right now.';
+
+          throw new Error(message);
         }
 
         const chunk = await response.json();
-        if (!chunk.length) break;
 
-        all = all.concat(chunk);
-        if (chunk.length < 100) break;
+        if (!Array.isArray(chunk) || chunk.length === 0) {
+          break;
+        }
+
+        allRepos = allRepos.concat(chunk);
+
+        if (chunk.length < 100) {
+          break;
+        }
+
         page += 1;
       }
 
-      return all;
+      return allRepos;
+    }
+
+    function resetFilters() {
+      elements.search.value = '';
+      elements.sort.value = 'updated';
+      elements.type.value = 'all';
+      elements.language.value = 'all';
+      renderRepositories();
+      showStatus('Filters reset.');
     }
 
     async function loadRepositories() {
@@ -213,24 +350,30 @@
 
       elements.profileBtn.href = `https://github.com/${encodeURIComponent(username)}`;
       elements.grid.innerHTML = '<div class="loading">Loading repository cards...</div>';
-      showStatus('Fetching repositories from GitHub...');
+      showStatus(`Fetching repositories for @${username}...`);
 
       try {
         repositories = await fetchAllRepos(username);
-        showStatus(`Loaded ${repositories.length} repositories for @${username}.`);
+        updateLanguageOptions();
+        updateStats();
         renderRepositories();
+        showStatus(`Loaded ${repositories.length} repositories for @${username}.`);
       } catch (error) {
         repositories = [];
-        elements.count.textContent = '0 shown • 0 total repository items';
+        updateLanguageOptions();
+        updateStats();
+        elements.count.textContent = '0 shown • 0 total repositories';
         elements.grid.innerHTML = `<p class="empty">${error.message}</p>`;
         showStatus(error.message, true);
       }
     }
 
     elements.reload.addEventListener('click', loadRepositories);
+    elements.reset.addEventListener('click', resetFilters);
     elements.search.addEventListener('input', renderRepositories);
     elements.sort.addEventListener('change', renderRepositories);
     elements.type.addEventListener('change', renderRepositories);
+    elements.language.addEventListener('change', renderRepositories);
 
     loadRepositories();
   </script>
