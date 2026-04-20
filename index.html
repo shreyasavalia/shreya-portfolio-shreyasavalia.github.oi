@@ -1,85 +1,238 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Shreya Savalia | AI Engineer Portfolio</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GitHub Club | Shreya's Repositories</title>
+  <meta name="description" content="A modern GitHub Club page showcasing all repositories with search, filters, and clean UI/UX." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-<header>
-    <nav>
-        <h2 class="logo">Shreya<span>.</span></h2>
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="#" class="brand" aria-label="GitHub Club home">GitHub <span>Club</span></a>
+      <nav aria-label="Main navigation">
+        <ul class="nav-links">
+          <li><a href="#repos">Repositories</a></li>
+          <li><a href="#how">How it works</a></li>
         </ul>
-    </nav>
-</header>
-
-<section class="hero">
-    <div class="hero-text">
-        <h1>Hello, I'm <span>Shreya Savalia</span></h1>
-        <h3>Aspiring AI Engineer from India</h3>
-        <p>I am passionate about Artificial Intelligence, innovation, and building smart tools that help students learn better. My mission is to create impactful AI solutions.</p>
-        <a href="#contact" class="btn">Let's Connect</a>
+      </nav>
     </div>
-</section>
+  </header>
 
-<section id="about" class="section">
-    <h2>About Me</h2>
-    <p>
-        I am an aspiring AI Engineer focused on learning Python, AI development, UI/UX design, and building real-world projects. 
-        I believe in growth mindset, leadership, and continuous self-improvement.
-    </p>
-    <p>
-        I actively research famous personalities to learn leadership skills and discipline. 
-        My goal is to develop AI tools that can generate research papers, PPTs, and academic content for students.
-    </p>
-</section>
+  <main id="main">
+    <section class="hero container">
+      <p class="tag">🚀 Built for showcasing all your work</p>
+      <h1>All my GitHub repositories in one beautiful place.</h1>
+      <p class="subtext">
+        Explore every public repository with fast search, smart sorting, and project cards designed for readability.
+      </p>
+      <div class="hero-cta">
+        <a class="btn primary" href="#repos">View Repositories</a>
+        <a class="btn ghost" id="profileBtn" href="https://github.com/shreyasavalia" target="_blank" rel="noopener noreferrer">Open GitHub Profile</a>
+      </div>
+    </section>
 
-<section id="skills" class="section dark">
-    <h2>Skills</h2>
-    <div class="skills-grid">
-        <div class="card">HTML & CSS</div>
-        <div class="card">UI/UX Design</div>
-        <div class="card">Artificial Intelligence (Learning)</div>
-        <div class="card">Research & Analysis</div>
-        <div class="card">Leadership Skills</div>
-        <div class="card">Problem Solving</div>
+    <section id="repos" class="repos-section">
+      <div class="container">
+        <div class="section-top">
+          <div>
+            <h2>Repository Directory</h2>
+            <p class="helper" id="repoCount">Loading repositories...</p>
+          </div>
+        </div>
+
+        <form class="controls" aria-label="Repository filters" onsubmit="return false">
+          <label>
+            GitHub Username
+            <input type="text" id="usernameInput" value="shreyasavalia" placeholder="Enter username" />
+          </label>
+          <label>
+            Search repositories
+            <input type="search" id="searchInput" placeholder="Search by name or description" />
+          </label>
+          <label>
+            Sort by
+            <select id="sortSelect">
+              <option value="updated">Last Updated</option>
+              <option value="stars">Most Stars</option>
+              <option value="name">Name (A-Z)</option>
+            </select>
+          </label>
+          <label>
+            Type
+            <select id="typeSelect">
+              <option value="all">All</option>
+              <option value="source">Source only (no forks)</option>
+              <option value="forks">Forks only</option>
+            </select>
+          </label>
+          <button class="btn primary" id="reloadBtn" type="button">Load Repositories</button>
+        </form>
+
+        <p id="status" role="status" aria-live="polite" class="status"></p>
+
+        <div id="repoGrid" class="repo-grid" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section id="how" class="container how-section">
+      <h2>How this stays functional</h2>
+      <ul>
+        <li>Fetches all public repositories directly from GitHub API using pagination.</li>
+        <li>Works without backend setup and runs on GitHub Pages.</li>
+        <li>Provides accessible controls, responsive cards, and keyboard-friendly interactions.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 GitHub Club by Shreya Savalia • Built with HTML, CSS, and JavaScript.</p>
     </div>
-</section>
+  </footer>
 
-<section id="projects" class="section">
-    <h2>Projects</h2>
-    <div class="project-card">
-        <h3>AI Tool for Students (Concept)</h3>
-        <p>
-            Planning and designing an AI tool that helps students generate PPTs, research papers, essays, and academic content efficiently.
-        </p>
-    </div>
-    <div class="project-card">
-        <h3>Personal Portfolio Website</h3>
-        <p>
-            Designed and developed a modern portfolio website using HTML and CSS for professional presentation on GitHub.
-        </p>
-    </div>
-</section>
+  <script>
+    const elements = {
+      username: document.getElementById('usernameInput'),
+      search: document.getElementById('searchInput'),
+      sort: document.getElementById('sortSelect'),
+      type: document.getElementById('typeSelect'),
+      reload: document.getElementById('reloadBtn'),
+      grid: document.getElementById('repoGrid'),
+      status: document.getElementById('status'),
+      count: document.getElementById('repoCount'),
+      profileBtn: document.getElementById('profileBtn')
+    };
 
-<section id="contact" class="section dark">
-    <h2>Contact Me</h2>
-    <p>📞 8866639563</p>
-    <p>📧 shreyasavalia47@gmail.com</p>
-    <p>📍 India</p>
-</section>
+    let repositories = [];
 
-<footer>
-    <p>© 2026 Shreya Savalia | Aspiring AI Engineer</p>
-</footer>
+    function formatDate(dateString) {
+      return new Date(dateString).toLocaleDateString(undefined, {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      });
+    }
 
+    function showStatus(message, isError = false) {
+      elements.status.textContent = message;
+      elements.status.classList.toggle('error', isError);
+    }
+
+    function renderRepositories() {
+      const q = elements.search.value.trim().toLowerCase();
+      const type = elements.type.value;
+      const sortBy = elements.sort.value;
+
+      let filtered = repositories.filter((repo) => {
+        const text = `${repo.name} ${repo.description || ''}`.toLowerCase();
+        const matchSearch = text.includes(q);
+        const matchType =
+          type === 'all' ||
+          (type === 'source' && !repo.fork) ||
+          (type === 'forks' && repo.fork);
+
+        return matchSearch && matchType;
+      });
+
+      filtered.sort((a, b) => {
+        if (sortBy === 'stars') return b.stargazers_count - a.stargazers_count;
+        if (sortBy === 'name') return a.name.localeCompare(b.name);
+        return new Date(b.updated_at) - new Date(a.updated_at);
+      });
+
+      elements.count.textContent = `${filtered.length} shown • ${repositories.length} total repository items`;
+
+      if (!filtered.length) {
+        elements.grid.innerHTML = '<p class="empty">No repositories match your current filters.</p>';
+        return;
+      }
+
+      elements.grid.innerHTML = filtered
+        .map((repo) => {
+          const language = repo.language || 'Not specified';
+          const description = repo.description || 'No description provided yet.';
+
+          return `
+            <article class="repo-card">
+              <div class="repo-head">
+                <h3><a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">${repo.name}</a></h3>
+                ${repo.fork ? '<span class="pill">Fork</span>' : '<span class="pill source">Source</span>'}
+              </div>
+              <p class="repo-desc">${description}</p>
+              <div class="meta-row">
+                <span>⭐ ${repo.stargazers_count}</span>
+                <span>🍴 ${repo.forks_count}</span>
+                <span>🧩 ${language}</span>
+              </div>
+              <div class="meta-row muted">
+                <span>Updated: ${formatDate(repo.updated_at)}</span>
+              </div>
+            </article>
+          `;
+        })
+        .join('');
+    }
+
+    async function fetchAllRepos(username) {
+      let page = 1;
+      let all = [];
+
+      while (true) {
+        const url = `https://api.github.com/users/${encodeURIComponent(username)}/repos?per_page=100&page=${page}&sort=updated`;
+        const response = await fetch(url);
+
+        if (!response.ok) {
+          throw new Error(response.status === 404 ? 'GitHub username not found.' : 'Unable to load repositories right now.');
+        }
+
+        const chunk = await response.json();
+        if (!chunk.length) break;
+
+        all = all.concat(chunk);
+        if (chunk.length < 100) break;
+        page += 1;
+      }
+
+      return all;
+    }
+
+    async function loadRepositories() {
+      const username = elements.username.value.trim();
+
+      if (!username) {
+        showStatus('Please enter a GitHub username.', true);
+        return;
+      }
+
+      elements.profileBtn.href = `https://github.com/${encodeURIComponent(username)}`;
+      elements.grid.innerHTML = '<div class="loading">Loading repository cards...</div>';
+      showStatus('Fetching repositories from GitHub...');
+
+      try {
+        repositories = await fetchAllRepos(username);
+        showStatus(`Loaded ${repositories.length} repositories for @${username}.`);
+        renderRepositories();
+      } catch (error) {
+        repositories = [];
+        elements.count.textContent = '0 shown • 0 total repository items';
+        elements.grid.innerHTML = `<p class="empty">${error.message}</p>`;
+        showStatus(error.message, true);
+      }
+    }
+
+    elements.reload.addEventListener('click', loadRepositories);
+    elements.search.addEventListener('input', renderRepositories);
+    elements.sort.addEventListener('change', renderRepositories);
+    elements.type.addEventListener('change', renderRepositories);
+
+    loadRepositories();
+  </script>
 </body>
 </html>
